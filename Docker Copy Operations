@@ -1,0 +1,7 @@
+login to respective server
+
+check docker state : docker ps
+
+copy it docker cp <location of file /file name>container_name:/destination
+
+check it : docker execute container_name ls -ltr /<destination>
