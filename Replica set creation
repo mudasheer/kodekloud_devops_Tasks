@@ -1,0 +1,5 @@
+ (nbtechsupport.co.in)
+
+kubectl get namespaces
+
+kubectl create -f /tmp/httpd.yaml
