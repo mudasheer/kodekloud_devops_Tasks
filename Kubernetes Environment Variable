@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+name: print-envars-greeting
+labels:
+name: print-envars-greeting
+spec:
+containers:
+- name: print-env-container
+ 
+  image: bash
+ 
+  env:
+ 
+    - name: GREETING
+ 
+      value: "Welcome to"
+ 
+    - name: COMPANY
+ 
+      value: "Nautilus"
+ 
+    - name: GROUP
+ 
+      value: "Datacenter"
+ 
+  command: ["echo"]
+ 
+  args: ["$(GREETING) $(COMPANY) $(GROUP)"]: 
+ 
+to check :  kubectl logs -f <pod name>
+---------------------------------------------------------------------------------------------------------------- 
+ 
+Rollback a deployment in kuberenetes
+ 
+kubectl get pods 
+ 
+ kubectl rollout undo deployment  <>
+ 
+kubectl rollout status deployment <>
+ 
+-------------------------------------------------------------
