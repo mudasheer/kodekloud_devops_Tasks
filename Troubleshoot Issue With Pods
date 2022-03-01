@@ -1,0 +1,7 @@
+kubectl get pods
+
+Kubectl describe pod <podname>
+
+kubectl edit pod <podname>
+
+edit and fix the issue
