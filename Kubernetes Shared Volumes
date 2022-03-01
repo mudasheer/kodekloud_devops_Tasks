@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+name: volume-share-devops
+labels:
+name: myapp
+spec:
+volumes:
+– name: volume-share
+emptyDir: {}
+containers:
+– name: volume-container-devops-1
+image: ubuntu:latest
+command: [“/bin/bash”, “-c”, “sleep 10000”]
+volumeMounts:
+– name: volume-share
+mountPath: /tmp/ecommerce
+– name: volume-container-devops-2
+image: ubuntu:latest
+command: [“/bin/bash”, “-c”, “sleep 10000”]
+volumeMounts:
+– name: volume-share
+mountPath: /tmp/demo
+
+kubectl exec -it volume-share-devops -c volume-conatiner-devops-1 — /bin/bash
+
