@@ -1,0 +1,37 @@
+navigate to directory mentioned in question
+
+class symlink {
+
+# First create a symlink to /var/www/html
+
+file { ‘/opt/sysops’:
+
+1
+2
+3
+ensure => 'link',
+ 
+target => '/var/www/html',
+}
+
+# Now create media.txt under /opt/sysops
+
+file { ‘/opt/sysops/story.txt’:
+
+1
+ensure => 'present',
+}
+
+}
+
+node ‘stapp03.stratos.xfusioncorp.com’ {
+
+include symlink
+
+}
+
+puppet parser validate <file>
+
+login to respective server
+
+sudo puppet agent -tv
