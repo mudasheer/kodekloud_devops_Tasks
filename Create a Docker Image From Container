@@ -1,0 +1,7 @@
+Login into Respective server 
+
+docker ps
+docker images
+docker commit <containername_tagname> imagename:tag
+
+docker images to check the output
