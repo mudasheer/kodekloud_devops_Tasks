@@ -30,3 +30,10 @@ spec:
           image: gcr.io/kodekloud/centos-ssh-enabled:node
           ports:
             - containerPort: 80
+            
+            
+           ------------------------------------------
+           
+           kubectl create -f <file path>
+           kubectl get pods 
+           check by clciking on node app tab
