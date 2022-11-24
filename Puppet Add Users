@@ -1,0 +1,63 @@
+As a new teammate has joined Nautilus application development team, the application development team has asked the DevOps team to create a new user for the new teammate on all application servers in Stratos Datacenter. The task needs to be performed using Puppet only. You can find more details below about the task.
+
+Create a Puppet programming file beta.pp under /etc/puppetlabs/code/environments/production/manifests directory on master node i.e Jump Server, and using Puppet user resource add a user on all app servers as mentioned below:
+
+Create a user anita and set its UID to 1851 on all Puppet agent nodes i.e all App Servers.
+
+Note: Please perform this task using beta.pp only, do not create any separate inventory file.
+
+Go through the folder mentioned in task and create puppet files  
+
+cd /etc/puppetlabs/code/environments/production/manifests/
+
+ vi beta.pp
+ 
+ -----------
+ 
+ class user_creator {
+
+user { 'anita':
+
+ensure   => present,
+
+uid => 1851,
+
+ }
+
+}
+
+node 'stapp01.stratos.xfusioncorp.com', 'stapp02.stratos.xfusioncorp.com', 'stapp03.stratos.xfusioncorp.com' {
+
+include user_creator
+
+}
+
+-------------------------
+
+puppet parser validate beta.pp
+
+ssh tony@stapp01
+
+[root@stapp01 ~]# puppet agent -tv
+
+Info: Using configured environment 'production'
+
+Info: Retrieving pluginfacts
+
+Info: Retrieving plugin
+
+Info: Retrieving locales
+
+Info: Loading facts
+
+Info: Caching catalog for stapp01.stratos.xfusioncorp.com
+
+Info: Applying configuration version '1624860136'
+
+Notice: /Stage[main]/User_creator/User[anita]/ensure: created
+
+Notice: Applied catalog in 0.09 seconds
+
+[root@stapp01 ~]#
+
+like wise do it for other 2 servers 
