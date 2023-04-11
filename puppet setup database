@@ -1,0 +1,49 @@
+The Nautilus DevOps team had a meeting with development team last week to discuss about some new requirements for an application deployment. Team is working on to setup a mariadb database server on Nautilus DB Server in Stratos Datacenter. They want to setup the same using Puppet. Below you can find more details about the requirements:
+
+Create a puppet programming file ecommerce.pp under /etc/puppetlabs/code/environments/production/manifests directory on puppet master node i.e on Jump Server. Define a class mysql_database in puppet programming code and perform below mentioned tasks:
+
+
+
+ cd /etc/puppetlabs/code/environments/production/manifests/
+ 
+ sudo vi ecommerce.pp
+ 
+ ----------------------------
+ class mysql_database {
+    package {'mariadb-server':
+      ensure => installed
+    }
+
+    service {'mariadb':
+        ensure    => running,
+        enable    => true,
+    }    
+
+    mysql::db { 'kodekloud_db2':
+      user     => 'kodekloud_roy',
+      password => 'B4zNgHA7Ya',
+      host     => 'localhost',
+      grant    => ['ALL'],
+    }
+}
+
+node 'stdb01.stratos.xfusioncorp.com' {
+  include mysql_database
+}
+
+--------------------------------------
+
+puppet parser validate   ecommerce.pp
+
+ssh peter@stdb01
+
+sudo su -
+
+puppet agent -tv
+
+check mariadb database server status
+
+      systemctl status mariadb 
+
+5. Validate the task by running 
+mysql -u kodekloud_roy -p kodekloud_db2 -h localhost
